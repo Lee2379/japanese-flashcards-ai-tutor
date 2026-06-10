@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Japanese Flashcards</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">日</div>
+          <div>
+            <h1>Japanese Flashcards</h1>
+            <p id="todayLabel">Day 1</p>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <label for="daySelect">Study Day</label>
+          <select id="daySelect"></select>
+          <div class="date-line" id="dateLine"></div>
+        </div>
+
+        <nav class="mode-tabs" aria-label="Study modes">
+          <button class="active" data-mode="today" title="Today">Today</button>
+          <button data-mode="grammar" title="Grammar">Grammar</button>
+          <button data-mode="conversation" title="Conversation">Conversation</button>
+          <button data-mode="interview" title="Interview">Interview</button>
+          <button data-mode="review" title="Review">Review</button>
+          <button data-mode="mistakes" title="Mistakes">Mistakes</button>
+          <button data-mode="all" title="All">All</button>
+        </nav>
+
+        <div class="stat-grid">
+          <div>
+            <strong id="newCount">0</strong>
+            <span>New Cards</span>
+          </div>
+          <div>
+            <strong id="reviewCount">0</strong>
+            <span>Review</span>
+          </div>
+          <div>
+            <strong id="grammarCount">0</strong>
+            <span>Grammar</span>
+          </div>
+          <div>
+            <strong id="conversationCount">0</strong>
+            <span>Conversation</span>
+          </div>
+          <div>
+            <strong id="interviewCount">0</strong>
+            <span>Interview</span>
+          </div>
+          <div>
+            <strong id="mistakeCount">0</strong>
+            <span>Mistakes</span>
+          </div>
+          <div>
+            <strong id="doneCount">0</strong>
+            <span>Done</span>
+          </div>
+        </div>
+
+        <div class="filters">
+          <div class="search-wrap">
+            <span>⌕</span>
+            <input id="searchInput" type="search" placeholder="Search word, meaning, or reading" />
+          </div>
+          <label class="toggle-row">
+            <input id="shuffleToggle" type="checkbox" />
+            <span>Shuffle</span>
+          </label>
+        </div>
+
+        <div class="source-note">
+          <span id="sourceUnit"></span>
+          <span id="grammarRange"></span>
+        </div>
+      </aside>
+
+      <main class="study-area">
+        <section class="topbar">
+          <div>
+            <h2 id="modeTitle">Today</h2>
+            <p id="deckMeta"></p>
+          </div>
+          <div class="top-actions">
+            <button id="chatToggleBtn" class="chat-toggle" title="Ishihara">Ishihara</button>
+            <button id="resetTodayBtn" class="icon-button" title="Reset today's progress">↺</button>
+            <button id="exportBtn" class="icon-button" title="Export progress">⇩</button>
+          </div>
+        </section>
+
+        <section class="progress-wrap" aria-label="Progress">
+          <div class="progress-bar">
+            <div id="progressFill"></div>
+          </div>
+          <span id="progressText">0 / 0</span>
+        </section>
+
+        <section class="import-panel hidden" id="importPanel">
+          <div>
+            <h3 id="importTitle">Import Source</h3>
+            <p id="importHelp"></p>
+          </div>
+          <textarea id="importText" rows="8" placeholder="Paste the copied Google Docs content here."></textarea>
+          <div class="import-actions">
+            <button id="importBtn" class="primary">Create Cards</button>
+            <button id="clearCustomBtn" class="secondary-wide">Clear Source</button>
+            <a id="docLink" href="#" target="_blank" rel="noreferrer">Open Document</a>
+          </div>
+          <p class="privacy-line">Pasted content is stored only in this browser's localStorage.</p>
+        </section>
+
+        <section class="chat-panel hidden" id="chatPanel">
+          <div class="chat-head">
+            <div class="avatar-wrap" id="avatarWrap">
+              <img src="assets/tutor-avatar.svg" alt="Ishihara avatar" />
+              <span class="voice-dot"></span>
+            </div>
+            <div>
+              <h3>Ishihara</h3>
+              <p>Ask questions, practice interviews, or rehearse natural Japanese conversation.</p>
+            </div>
+            <div class="chat-head-actions">
+              <span id="chatStatus">Checking local server</span>
+              <button id="chatCloseBtn" class="icon-button" type="button" title="Close">×</button>
+            </div>
+          </div>
+          <div class="chat-log" id="chatLog"></div>
+          <div class="voice-controls">
+            <button id="voiceModeBtn" class="secondary-wide" type="button">Start Voice Chat</button>
+            <button id="voiceSendBtn" class="secondary-wide" type="button">Send Spoken Text</button>
+            <select id="voiceLangSelect" aria-label="Speech recognition language">
+              <option value="ja-JP">Japanese</option>
+              <option value="ko-KR">Korean</option>
+              <option value="en-US">English</option>
+            </select>
+            <span id="voiceStatus">Mic standby</span>
+          </div>
+          <form class="chat-form" id="chatForm">
+            <textarea id="chatInput" rows="3" placeholder="Example: Make this interview answer sound more natural in Japanese."></textarea>
+            <button id="speakInputBtn" class="secondary-wide" type="button">Speak</button>
+            <button class="primary" type="submit">Send</button>
+          </form>
+        </section>
+
+        <section class="card-stage">
+          <article class="flashcard" id="flashcard">
+            <div class="card-kicker" id="cardKicker">JLPT</div>
+            <div class="card-front" id="cardFront">Loading cards</div>
+            <div class="card-answer hidden" id="cardAnswer">
+              <div class="answer-row">
+                <span>Reading</span>
+                <strong id="answerReading"></strong>
+              </div>
+              <div class="answer-row">
+                <span>Meaning</span>
+                <strong id="answerMeaning"></strong>
+              </div>
+            </div>
+          </article>
+
+          <div class="card-actions">
+            <button id="prevBtn" class="secondary" title="Previous">←</button>
+            <button id="showBtn" class="primary">Show Answer</button>
+            <button id="nextBtn" class="secondary" title="Next">→</button>
+          </div>
+
+          <div class="rating-actions hidden" id="ratingActions">
+            <button data-rating="again" class="rating again">Again</button>
+            <button data-rating="hard" class="rating hard">Hard</button>
+            <button data-rating="good" class="rating good">Good</button>
+            <button data-rating="easy" class="rating easy">Easy</button>
+          </div>
+        </section>
+
+        <section class="list-panel">
+          <div class="list-head">
+            <h3>Card List</h3>
+            <span id="listCount">0</span>
+          </div>
+          <div class="card-list" id="cardList"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

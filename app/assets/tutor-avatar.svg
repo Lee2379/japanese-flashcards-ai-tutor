@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="220" viewBox="0 0 320 220" role="img" aria-labelledby="title desc">
+  <title id="title">AI tutor avatar placeholder</title>
+  <desc id="desc">A neutral illustrated tutor avatar for the public demo.</desc>
+  <rect width="320" height="220" rx="20" fill="#dff5ff"/>
+  <circle cx="160" cy="88" r="46" fill="#102334"/>
+  <circle cx="160" cy="94" r="38" fill="#f4d7c8"/>
+  <path d="M119 84c8-37 33-55 66-38 20 10 30 29 29 52-23-13-50-17-95-14Z" fill="#18283a"/>
+  <path d="M83 190c11-43 40-66 77-66s66 23 77 66" fill="#ffffff"/>
+  <path d="M105 190c9-28 29-42 55-42s46 14 55 42" fill="#54c4f6" opacity=".45"/>
+  <circle cx="145" cy="98" r="4" fill="#102334"/>
+  <circle cx="175" cy="98" r="4" fill="#102334"/>
+  <path d="M146 119c10 9 20 9 30 0" fill="none" stroke="#102334" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="248" cy="170" r="13" fill="#16846b" stroke="#fff" stroke-width="5"/>
+</svg>
