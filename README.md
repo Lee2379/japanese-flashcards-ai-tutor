@@ -1,4 +1,4 @@
-# Japanese Flashcards AI Tutor
+# Japanese Learning AI Tutor
 
 日本語学習、JLPT対策、面接練習、AI会話練習を一つにまとめたローカルファーストの学習Webアプリです。  
 このリポジトリは公開用の技術ケーススタディとして、個人データ・APIキー・私的な学習資料を除外した sanitized demo です。
